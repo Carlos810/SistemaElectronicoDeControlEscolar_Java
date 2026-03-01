@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es"
+    xmlns:th="http://www.thymeleaf.org"
+    th:replace="layout/base :: layout(~{::body})"
+>
+
+<body>
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5>Listado actividades</h5>
+    </div>
+    <div class="card-body">
+        <a th:href="@{/web/actividades/new}" class="btn btn-primary mb-3">Registrar Actividad</a>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover datatable">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Actividad</th>
+                    <th>Descripción Aula</th>
+                    <th>Fecha</th>
+                    <th>Hora Entrada</th>
+                    <th>Hora Salida</th>
+                    <th>Permanencia en Aula</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="act:${actividades}">
+                    <td th:text="${act.nombre}"></td>
+                    <td th:text="${act.nombreActividad}"> </td>
+                    <td th:text="${act.descripcion}"></td>
+                    <td th:text="${act.fecha}"></td>
+                    <td th:text="${act.horaEntrada}"></td>
+                    <td th:text="${act.horaSalida}"></td>
+                    <td th:text="${act.tiempoAulaHrs}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
