@@ -13,11 +13,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/web/usuarios")
 public class UsuarioController {
-    private UsuarioService _usuariosService;
+    //private UsuarioService _usuariosService;
     private IUsuarioJpaRepository _usuarioRepository;
 
     public UsuarioController(UsuarioService  usuariosService, IUsuarioJpaRepository usuarioRepository){
-        this._usuariosService = usuariosService;
+        //this._usuariosService = usuariosService;
         this._usuarioRepository = usuarioRepository;
     }
 

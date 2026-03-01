@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es"
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="layout/base :: layout(~{::body})">
+
+<body>
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5>Listado de Salas</h5>
+    </div>
+
+    <div class="card-body">
+        <a th:href="@{/web/salas/new}" class="btn btn-primary mb-3">Registrar Sala</a>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover datatable">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre Sala</th>
+                    <th>Descripción</th>
+                    <th>Disponible</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sala:${salas}">
+                    <td th:text="${sala.idSala}"></td>
+                    <td th:text="${sala.nombre}"></td>
+                    <td th:text="${sala.descripcion}"></td>
+                    <td th:text="${sala.disponible}"></td>
+                    <td>
+                        <a th:href="@{/web/salas/edit/{id}(id=${sala.idSala})}"
+                           class="btn btn-info text-white btn-sm">
+                            Editar
+                        </a>
+                        <a th:href="@{/web/salas/delete/{id}(${sala.idSala})}"
+                           th:onclick="|return confirm('¿Eliminar sala ID: ${sala.idSala}?')|"
+                           class="btn btn-danger btn-sm">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
