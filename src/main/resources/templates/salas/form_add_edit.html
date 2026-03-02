@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::body})}">
+<body>
+    <!-- ================= LAYOUT PRINCIPAL ================= -->
+    <div class="container mt-4">
+        <!-- ================= TITULO DINÁMICO ================= -->
+        <!-- Si idSala es null → Agregar -->
+        <!-- Si idSala tiene valor → Editar -->
+        <h3 th:text="${sala.idSala == null} ? 'Agregar Nueva Sala' : 'Editar Sala'">
+            Formulario Sala
+        </h3>
+
+        <!-- ================= FORMULARIO ================= -->
+        <form th:action="@{/web/salas/guardar}"
+              th:object="${sala}"
+              method="post">
+
+            <!-- ================= CAMPO OCULTO PARA EDICIÓN ================= -->
+            <!-- Solo se usa cuando es edición -->
+            <input type="hidden" th:field="*{idSala}" />
+
+            <!-- ================= NOMBRE ================= -->
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text"
+                       th:field="*{nombre}"
+                       class="form-control"
+                       placeholder="Ingrese nombre de la sala"
+                       required
+                       style="text-transform: uppercase" >
+            </div>
+
+            <!-- ================= DESCRIPCIÓN ================= -->
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <textarea th:field="*{descripcion}"
+                          class="form-control"
+                          rows="3"
+                          placeholder="Descripción opcional"
+                          style="text-transform: uppercase"  >
+                </textarea>
+            </div>
+
+            <!-- ================= DISPONIBLE ================= -->
+            <div class="mb-3">
+                <label class="form-label">Disponible</label>
+                <select th:field="*{disponible}"
+                        class="form-select">
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <!-- ================= BOTONES ================= -->
+            <div class="d-flex justify-content-between">
+
+                <!-- Botón Cancelar -->
+                <a th:href="@{/web/salas}"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+                <!-- Botón Guardar -->
+                <button type="submit"
+                        class="btn btn-primary"
+                        th:text="${sala.idSala == null} ? 'Guardar' : 'Actualizar'">
+                    Guardar
+                </button>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

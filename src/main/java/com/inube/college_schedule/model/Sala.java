@@ -14,6 +14,8 @@ import java.util.List;
 public class Sala {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "sala_seq", sequenceName = "SEQ_ID_SALA_CA",allocationSize = 1)
     @Column(name = "ID_SALA")
     private Long idSala;
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es"
         xmlns:th="http://www.thymeleaf.org"
-        th:replace="layout/base :: layout(~{::body})">
+        th:replace="~{layout/base :: layout(~{::body})}">
 
 <body>
 <div class="card shadow-sm">
@@ -29,12 +29,16 @@
                     <td th:text="${sala.descripcion}"></td>
                     <td th:text="${sala.disponible}"></td>
                     <td>
-                        <a th:href="@{/web/salas/edit/{id}(id=${sala.idSala})}"
+                        <!--<a th:href="@{/web/salas/edit/{id}(id=${sala.idSala})}"
+                           class="btn btn-info text-white btn-sm">
+                            Editar
+                        </a>-->
+                        <a th:href="@{/web/salas/new(id=${sala.idSala})}"
                            class="btn btn-info text-white btn-sm">
                             Editar
                         </a>
-                        <a th:href="@{/web/salas/delete/{id}(${sala.idSala})}"
-                           th:onclick="|return confirm('¿Eliminar sala ID: ${sala.idSala}?')|"
+                        <a th:href="@{/web/salas/delete/{id}(id=${sala.idSala})}"
+
                            class="btn btn-danger btn-sm">
                             Eliminar
                         </a>

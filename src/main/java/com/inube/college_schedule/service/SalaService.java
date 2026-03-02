@@ -3,6 +3,7 @@ package com.inube.college_schedule.service;
 import com.inube.college_schedule.model.Sala;
 import com.inube.college_schedule.repository.ISalaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,4 +23,18 @@ public class SalaService {
         }
         return lSalasActivas;
     }
+
+    public void toggleEstado(Long id){
+
+        Sala sala = _salaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sala no encontrada"));
+
+        sala.setDisponible(
+                sala.getDisponible() == 1 ? 0 : 1
+        );
+
+        _salaRepository.save(sala);
+    }
+
+
 }

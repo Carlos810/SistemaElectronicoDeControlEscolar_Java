@@ -68,10 +68,10 @@
 <body>
 
 <!-- Navbar -->
-<div th:replace="layout/navbar :: navbar"></div>
+<div th:replace="~{layout/navbar :: navbar}"></div>
 
 <!-- Sidebar -->
-<div th:replace="layout/sidebar :: sidebar"></div>
+<div th:replace="~{layout/sidebar :: sidebar}"></div>
 
 <!-- Contenido dinámico -->
 <div id="main-content" class="container-fluid">
@@ -107,7 +107,7 @@
     $(document).ready(function () {
         $('.datatable').DataTable({
             responsive: true,
-            pageLength: 5,
+            pageLength: 7,
             lengthMenu: [5, 10, 25],
             language: {
                 url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
@@ -121,6 +121,11 @@
                 'pdf'
             ]
             */
+        });
+
+        //Convierte a mayusculas toda la informacion capturada en todos los input texto
+        $("input[type='text'], textarea").on("input", function () {
+            this.value = this.value.toUpperCase();
         });
     });
 </script>
