@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::body})}">
+
+<body>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+
+    <div class="card shadow border-0">
+
+      <div class="card-header bg-danger text-white">
+        <h5 class="mb-0">
+          Confirmar Eliminación
+        </h5>
+      </div>
+
+      <div class="card-body text-center">
+
+        <p class="fs-5">
+          ¿Estás seguro que deseas eliminar esta actividad?
+        </p>
+
+        <div class="alert alert-warning text-start">
+
+          <strong>ID:</strong>
+          <span th:text="${actividades.idActividad}"></span>
+          <br>
+
+          <strong>Actividad:</strong>
+          <span th:text="${actividades.nombreActividad}"></span>
+          <br>
+
+          <strong>Hora Entrada:</strong>
+          <span th:text="${#temporals.format(actividades.horarioEntrada,'dd/MM/yyyy HH:mm')}"></span>
+          <br>
+
+          <strong>Hora Salida:</strong>
+          <span th:text="${actividades.horarioSalida != null ? #temporals.format(actividades.horarioSalida,'dd/MM/yyyy HH:mm') : 'Sin registrar'}"></span>
+
+        </div>
+
+        <form th:action="@{/web/actividades/toggle/{id}(id=${actividades.idActividad})}"
+              method="post">
+
+          <button type="submit"
+                  class="btn btn-danger me-2">
+            Sí, eliminar
+          </button>
+
+          <a th:href="@{/web/actividades}"
+             class="btn btn-secondary">
+            Cancelar
+          </a>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
