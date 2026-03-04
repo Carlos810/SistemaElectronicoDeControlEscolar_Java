@@ -53,7 +53,7 @@ public class Actividad {
     private String ipCreacion;
 
     @PrePersist
-    public void prePrersist(){
+    public void prePersist(){
         this.fechaCreacion = LocalDateTime.now();
     }
 }

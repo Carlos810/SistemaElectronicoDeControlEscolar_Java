@@ -1,6 +1,7 @@
 package com.inube.college_schedule.Dto;
 
 public interface RegistroDiarioProjection {
+    String getIdActividad();
     String getNombre();
     String getNombreActividad();
     String getDescripcion();

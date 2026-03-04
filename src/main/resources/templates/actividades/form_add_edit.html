@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="es"
       xmlns:th="http://www.thymeleaf.org"
@@ -8,7 +9,7 @@
 
 <div class="container mt-4">
 
-  <!-- ================= TITULO DINÁMICO ================= -->
+  &lt;!&ndash; ================= TITULO DINÁMICO ================= &ndash;&gt;
 
   <h3 th:text="${actividad.idActividad == null} ? 'Agregar Actividad' : 'Editar Actividad'">
     Formulario Actividad
@@ -20,12 +21,12 @@
         method="post"
   >
 
-    <!-- ================= ID OCULTO ================= -->
+    &lt;!&ndash; ================= ID OCULTO ================= &ndash;&gt;
 
     <input type="hidden" th:field="*{idActividad}">
 
 
-    <!-- ================= USUARIO ================= -->
+    &lt;!&ndash; ================= USUARIO ================= &ndash;&gt;
 
     <div class="mb-3">
 
@@ -45,7 +46,7 @@
     </div>
 
 
-    <!-- ================= SALA ================= -->
+    &lt;!&ndash; ================= SALA ================= &ndash;&gt;
 
     <div class="mb-3">
 
@@ -65,7 +66,7 @@
     </div>
 
 
-    <!-- ================= NOMBRE ACTIVIDAD ================= -->
+    &lt;!&ndash; ================= NOMBRE ACTIVIDAD ================= &ndash;&gt;
 
     <div class="mb-3">
 
@@ -80,21 +81,25 @@
     </div>
 
 
-    <!-- ================= FECHA ================= -->
+    &lt;!&ndash; ================= FECHA ================= &ndash;&gt;
 
     <div class="mb-3">
 
       <label class="form-label">Fecha</label>
 
+      &lt;!&ndash;<input id="fechaActividad"
+             type="date"
+             class="form-control"
+             required>&ndash;&gt;
       <input id="fechaActividad"
              type="date"
              class="form-control"
+             th:value="${#temporals.format(actividad.horarioEntrada,'yyyy-MM-dd')}"
              required>
-
     </div>
 
 
-    <!-- ================= HORA ================= -->
+    &lt;!&ndash; ================= HORA ================= &ndash;&gt;
 
     <div class="mb-3">
 
@@ -102,10 +107,17 @@
 
       <div class="input-group">
 
+        &lt;!&ndash;<input id="horaActividad"
+               type="time"
+               class="form-control"
+               step="60"
+               required>&ndash;&gt;
+
         <input id="horaActividad"
                type="time"
                class="form-control"
                step="60"
+               th:value="${#temporals.format(actividad.horarioEntrada,'HH:mm')}"
                required>
 
         <button type="button"
@@ -121,14 +133,14 @@
     </div>
 
 
-    <!-- ================= CAMPO OCULTO LOCALDATETIME ================= -->
+    &lt;!&ndash; ================= CAMPO OCULTO LOCALDATETIME ================= &ndash;&gt;
 
     <input type="hidden"
            th:field="*{horarioEntrada}"
            id="horarioEntradaFinal">
 
 
-    <!-- ================= BOTONES ================= -->
+    &lt;!&ndash; ================= BOTONES ================= &ndash;&gt;
 
     <div class="d-flex justify-content-between">
 
@@ -154,4 +166,153 @@
 
 
 </body>
-</html>
+</html>-->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::content})}">
+
+<div th:fragment="content">
+
+  <div class="container mt-4">
+
+    <h3 th:text="${actividad.idActividad == null} ? 'Agregar Actividad' : 'Editar Actividad'">
+      Formulario Actividad
+    </h3>
+
+    <form th:action="@{/web/actividades/guardar}"
+          th:object="${actividad}"
+          method="post">
+
+      <!-- ================= ID ================= -->
+
+      <input type="hidden" th:field="*{idActividad}">
+
+      <!-- ================= USUARIO ================= -->
+
+      <div class="mb-3">
+
+        <label class="form-label">Usuario</label>
+
+        <select th:field="*{usuario.idUsuario}" class="form-select" required>
+
+          <option value="">Seleccione usuario</option>
+
+          <option th:each="u : ${usuarios}"
+                  th:value="${u.idUsuario}"
+                  th:text="${u.nombre}"
+                  th:selected="${actividad.usuario != null and u.idUsuario == actividad.usuario.idUsuario}">
+          >
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- ================= SALA ================= -->
+
+      <div class="mb-3">
+
+        <label class="form-label">Sala</label>
+
+        <select th:field="*{sala.idSala}" class="form-select" required>
+
+          <option value="">Seleccione sala</option>
+
+          <option th:each="s : ${salas}"
+                  th:value="${s.idSala}"
+                  th:text="${s.nombre}"
+                  th:selected="${actividad.sala != null and s.idSala == actividad.sala.idSala}">
+          >
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- ================= NOMBRE ACTIVIDAD ================= -->
+
+      <div class="mb-3">
+
+        <label class="form-label">Nombre Actividad</label>
+
+        <input th:field="*{nombreActividad}"
+               type="text"
+               class="form-control"
+               placeholder="Ej: teatro, canto, evaluaciones"
+               required>
+
+      </div>
+
+      <!-- ================= FECHA ================= -->
+
+      <div class="mb-3">
+
+        <label class="form-label">Fecha</label>
+
+        <input id="fechaActividad"
+               type="date"
+               class="form-control"
+               th:value="${actividad.horarioEntrada != null} ? ${#temporals.format(actividad.horarioEntrada,'yyyy-MM-dd')} : ''"
+               required>
+
+      </div>
+
+      <!-- ================= HORA ================= -->
+
+      <div class="mb-3">
+
+        <label class="form-label">Hora de Entrada</label>
+
+        <div class="input-group">
+
+          <input id="horaActividad"
+                 type="time"
+                 class="form-control"
+                 step="60"
+                 th:value="${actividad.horarioEntrada != null} ? ${#temporals.format(actividad.horarioEntrada,'HH:mm')} : ''"
+                 required>
+
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  id="btnHoraActual">
+
+            Usar hora actual
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- ================= CAMPO OCULTO LocalDateTime ================= -->
+
+      <input type="hidden"
+             th:field="*{horarioEntrada}"
+             id="horarioEntradaFinal">
+
+      <!-- ================= BOTONES ================= -->
+
+      <div class="d-flex justify-content-between">
+
+        <a th:href="@{/web/actividades}" class="btn btn-secondary">
+          Cancelar
+        </a>
+
+        <button type="submit"
+                class="btn btn-primary"
+                th:text="${actividad.idActividad == null} ? 'Guardar' : 'Actualizar'">
+          Guardar
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>

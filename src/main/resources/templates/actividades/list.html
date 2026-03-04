@@ -22,6 +22,7 @@
                     <th>Hora Entrada</th>
                     <th>Hora Salida</th>
                     <th>Permanencia en Aula</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,17 @@
                     <td th:text="${act.horaEntrada}"></td>
                     <td th:text="${act.horaSalida}"></td>
                     <td th:text="${act.tiempoAulaHrs}"></td>
+                    <td>
+                        <a th:href="@{/web/actividades/new(id=${act.idActividad})}"
+                           class="btn btn-info text-white btn-sm">
+                            Editar
+                        </a>
+                        <a th:href="@{/web/actividades/delete/{id}(id=${act.idActividad})}"
+
+                           class="btn btn-danger btn-sm">
+                            Eliminar
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

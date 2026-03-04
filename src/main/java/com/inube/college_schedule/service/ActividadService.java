@@ -13,7 +13,7 @@ public class ActividadService {
     }
 
     public List<RegistroDiarioProjection> listaActividades(Optional<Long> id) throws Exception{
-        List<RegistroDiarioProjection> lActividades = _actividadesRepository.mostrarActividadesDiarias();
+        List<RegistroDiarioProjection> lActividades = _actividadesRepository.mostrarActividadesDiarias(null);
         if(id!= null && lActividades.isEmpty()){
             throw new Exception("No se encontro actividad con ID: "+id);
         }

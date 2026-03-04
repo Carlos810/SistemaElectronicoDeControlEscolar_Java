@@ -100,102 +100,113 @@
 -->
 
 <script>
-    // Toggle Sidebar Overlay
-    document.getElementById("toggleSidebar")
-        .addEventListener("click", function () {
-            document.getElementById("sidebar")
-                .classList.toggle("active");
-        });
+    
 
-    // Inicialización DataTable
-    $(document).ready(function () {
-        $('.datatable').DataTable({
-            responsive: true,
-            pageLength: 7,
-            lengthMenu: [5, 10, 25],
-            language: {
-                url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
-            }
 
-            // FUTURE EXPORT BUTTONS
-            /*
-            dom: 'Bfrtip',
-            buttons: [
-                'excel',
-                'pdf'
-            ]
-            */
-        });
 
-        //Convierte a mayusculas toda la informacion capturada en todos los input texto
-        $("input[type='text'], textarea").on("input", function () {
-            this.value = this.value.toUpperCase();
-        });
+    // ================= SIDEBAR =================
+document.getElementById("toggleSidebar")
+    ?.addEventListener("click", function () {
+        document.getElementById("sidebar")
+            .classList.toggle("active");
     });
 
-    $(document).ready(function(){
 
-      inicializarFechaActual();
+// ================= DATATABLE =================
+$(document).ready(function () {
 
-      configurarBotonHoraActual();
+    $('.datatable').DataTable({
+        responsive: true,
+        pageLength: 7,
+        lengthMenu: [5, 10, 25],
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+        }
+    });
 
-      configurarSubmitFormulario();
-
-  });
-
-
-  /**
-   * Inicializa el campo fecha con la fecha actual
-   */
-  function inicializarFechaActual(){
-    $("#fechaActividad").val('');
-      let hoy = new Date().toISOString().split("T")[0];
-
-      $("#fechaActividad").val(hoy);
-
-  }
+});
 
 
-  /**
-   * Captura la hora actual al presionar el botón
-   */
-  function configurarBotonHoraActual(){
+// ================= INICIALIZACION GENERAL =================
+$(document).ready(function(){
 
-      $("#btnHoraActual").click(function(){
+    inicializarFechaActual();
 
-          let ahora = new Date();
+    configurarBotonHoraActual();
 
-          let horas = ahora.getHours().toString().padStart(2,'0');
+    configurarSubmitFormulario();
 
-          let minutos = ahora.getMinutes().toString().padStart(2,'0');
-
-          let horaActual = horas + ":" + minutos;
-
-          $("#horaActividad").val(horaActual);
-
-      });
-
-  }
+});
 
 
-  /**
-   * Combina fecha + hora antes de enviar el formulario
-   */
-  function configurarSubmitFormulario(){
+// ================= FECHA ACTUAL =================
+/**
+ * Inicializa el campo fecha con la fecha actual
+ * SOLO si el campo viene vacío (modo agregar).
+ * En modo editar respeta el valor que envía Thymeleaf.
+ */
+function inicializarFechaActual(){
 
-      $("form").submit(function(){
+    let fechaInput = $("#fechaActividad");
 
-          let fecha = $("#fechaActividad").val();
+    if(!fechaInput.val()){
 
-          let hora = $("#horaActividad").val();
+        let hoy = new Date().toISOString().split("T")[0];
 
-          let fechaHora = fecha + "T" + hora;
+        fechaInput.val(hoy);
 
-          $("#horarioEntradaFinal").val(fechaHora);
+    }
 
-      });
+}
 
-  }
+
+// ================= BOTON HORA ACTUAL =================
+/**
+ * Inserta la hora actual al presionar el botón
+ */
+function configurarBotonHoraActual(){
+
+    $("#btnHoraActual").click(function(){
+
+        let ahora = new Date();
+
+        let horas = ahora.getHours().toString().padStart(2,'0');
+
+        let minutos = ahora.getMinutes().toString().padStart(2,'0');
+
+        let horaActual = horas + ":" + minutos;
+
+        $("#horaActividad").val(horaActual);
+
+    });
+
+}
+
+
+// ================= SUBMIT FORMULARIO =================
+/**
+ * Combina fecha + hora en formato ISO
+ * para enviarlo como LocalDateTime a Spring Boot
+ */
+function configurarSubmitFormulario(){
+
+    $("form").submit(function(){
+
+        let fecha = $("#fechaActividad").val();
+
+        let hora = $("#horaActividad").val();
+
+        if(fecha && hora){
+
+            let fechaHora = fecha + "T" + hora;
+
+            $("#horarioEntradaFinal").val(fechaHora);
+
+        }
+
+    });
+
+}
 </script>
 
 </body>
