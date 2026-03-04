@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ import java.util.List;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
     @SequenceGenerator(name = "usuario_seq",sequenceName = "SEQ_ID_USUARIO_CA",allocationSize = 1)
     @Column(name = "ID_USUARIO")
     private Long idUsuario;
@@ -32,8 +33,8 @@ public class Usuario {
     @Column(name = "IP_CREACION")
     private String ipCreacion;
 
-    @Column(name = "FECHA_CREACION")
-    private LocalDate fechaCreacion;
+    @Column(name = "FECHA_CREACION", insertable = false, updatable = false)
+    private LocalDateTime fechaCreacion;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     @ToString.Exclude //evita bucles infinitos

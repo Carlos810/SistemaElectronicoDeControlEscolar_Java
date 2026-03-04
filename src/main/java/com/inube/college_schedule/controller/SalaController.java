@@ -32,7 +32,7 @@ public class SalaController {
     @GetMapping("/new")
     public String mostrarFormulario(@RequestParam(required = false)Long id , Model model){
         Sala sala;
-        if(id!=null){
+        if(id != null){
             List<Sala> resultado = _salaRepository.buscarSalasActivas(id);
             if(resultado.isEmpty()){
                 throw new RuntimeException("Sala no encontrada o inactiva");

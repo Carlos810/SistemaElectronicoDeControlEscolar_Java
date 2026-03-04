@@ -2,7 +2,7 @@ package com.inube.college_schedule.service;
 
 import com.inube.college_schedule.model.Usuario;
 import com.inube.college_schedule.repository.IUsuarioJpaRepository;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,4 +28,15 @@ public class UsuarioService {
         }
         return lUsuarios;
     };
+
+    @Transactional
+    public void toggleEstado(Long id){
+        Usuario usuario = _usuarioJpaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuario.setEstatus(
+                usuario.getEstatus() == 1 ? 0 : 1
+        );
+    }
+
 }

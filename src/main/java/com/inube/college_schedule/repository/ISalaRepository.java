@@ -16,4 +16,6 @@ public interface ISalaRepository  extends JpaRepository<Sala,Long> {
         AND(:id IS NULL OR s.idSala = :id) 
         """)
     List<Sala> buscarSalasActivas(@Param("id")Long id);
+
+
 }

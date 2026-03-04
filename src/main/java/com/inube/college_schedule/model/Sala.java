@@ -14,7 +14,7 @@ import java.util.List;
 public class Sala {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sala_seq")
     @SequenceGenerator(name = "sala_seq", sequenceName = "SEQ_ID_SALA_CA",allocationSize = 1)
     @Column(name = "ID_SALA")
     private Long idSala;

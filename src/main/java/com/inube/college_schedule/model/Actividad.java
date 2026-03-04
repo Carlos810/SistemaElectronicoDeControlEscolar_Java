@@ -51,4 +51,9 @@ public class Actividad {
 
     @Column(name = "IP_CREACION")
     private String ipCreacion;
+
+    @PrePersist
+    public void prePrersist(){
+        this.fechaCreacion = LocalDateTime.now();
+    }
 }

@@ -61,6 +61,10 @@
         /* FUTURE MOBILE:
            convertir sidebar a offcanvas bootstrap
         */
+
+        input[type="text"],textarea {
+            text-transform: lowercase;
+        }
     </style>
 
 </head>
@@ -128,6 +132,70 @@
             this.value = this.value.toUpperCase();
         });
     });
+
+    $(document).ready(function(){
+
+      inicializarFechaActual();
+
+      configurarBotonHoraActual();
+
+      configurarSubmitFormulario();
+
+  });
+
+
+  /**
+   * Inicializa el campo fecha con la fecha actual
+   */
+  function inicializarFechaActual(){
+    $("#fechaActividad").val('');
+      let hoy = new Date().toISOString().split("T")[0];
+
+      $("#fechaActividad").val(hoy);
+
+  }
+
+
+  /**
+   * Captura la hora actual al presionar el botón
+   */
+  function configurarBotonHoraActual(){
+
+      $("#btnHoraActual").click(function(){
+
+          let ahora = new Date();
+
+          let horas = ahora.getHours().toString().padStart(2,'0');
+
+          let minutos = ahora.getMinutes().toString().padStart(2,'0');
+
+          let horaActual = horas + ":" + minutos;
+
+          $("#horaActividad").val(horaActual);
+
+      });
+
+  }
+
+
+  /**
+   * Combina fecha + hora antes de enviar el formulario
+   */
+  function configurarSubmitFormulario(){
+
+      $("form").submit(function(){
+
+          let fecha = $("#fechaActividad").val();
+
+          let hora = $("#horaActividad").val();
+
+          let fechaHora = fecha + "T" + hora;
+
+          $("#horarioEntradaFinal").val(fechaHora);
+
+      });
+
+  }
 </script>
 
 </body>

@@ -34,15 +34,14 @@
                         <td th:text="${usuario.nombre}"></td>
                         <td th:text="${usuario.correo}"></td>
                         <td th:text="${usuario.estatus}"></td>
-                        <td th:text="${usuario.fechaCreacion}"></td>
+                        <td th:text="${usuario.fechaCreacion.toLocalDate()}"></td>
                         <td>
-                            <a th:href="@{/web/usuarios/edit/{id}(id=${usuario.idUsuario})}"
+                            <a th:href="@{/web/usuarios/new(id=${usuario.idUsuario})}"
                                class="btn btn-info text-white btn-sm">
                                 Editar
                             </a>
 
                             <a th:href="@{/web/usuarios/delete/{id}(id=${usuario.idUsuario})}"
-                               th:onclick="|return confirm('¿Eliminar usuario ID: ${usuario.idUsuario}?')|"
                                class="btn btn-danger btn-sm">
                                 Eliminar
                             </a>
