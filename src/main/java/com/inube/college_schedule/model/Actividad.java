@@ -46,14 +46,16 @@ public class Actividad {
     @Column(name = "ESTATUS")
     private Integer estatus = 1;
 
-    @Column(name = "FECHA_CREACION")
+    @Column(name = "FECHA_CREACION",updatable = false)
     private LocalDateTime fechaCreacion;
 
     @Column(name = "IP_CREACION")
     private String ipCreacion;
 
+
     @PrePersist
     public void prePersist(){
         this.fechaCreacion = LocalDateTime.now();
     }
+
 }

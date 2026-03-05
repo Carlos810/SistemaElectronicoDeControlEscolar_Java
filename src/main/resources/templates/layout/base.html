@@ -119,7 +119,52 @@
 -->
 
 <script>
-    
+    function usarHoraActualEntrada(){
+
+    const ahora = new Date()
+
+    const horas = String(ahora.getHours()).padStart(2,'0')
+    const minutos = String(ahora.getMinutes()).padStart(2,'0')
+
+    document.getElementById("horaActividad").value = horas + ":" + minutos
+}
+
+
+function usarHoraSalidaMasUno(){
+
+    const ahora = new Date()
+
+    ahora.setHours(ahora.getHours() + 1)
+
+    const horas = String(ahora.getHours()).padStart(2,'0')
+    const minutos = String(ahora.getMinutes()).padStart(2,'0')
+
+    document.getElementById("horaActividadSalida").value = horas + ":" + minutos
+}
+
+
+function prepararFechas(){
+
+    const fecha = document.getElementById("fechaActividad").value
+
+    const horaEntrada = document.getElementById("horaActividad").value
+    const horaSalida = document.getElementById("horaActividadSalida").value
+
+    if(fecha && horaEntrada){
+
+        document.getElementById("horarioEntradaFinal").value =
+            fecha + "T" + horaEntrada + ":00"
+
+    }
+
+    if(fecha && horaSalida){
+
+        document.getElementById("horarioSalidaFinal").value =
+            fecha + "T" + horaSalida + ":00"
+
+    }
+
+}
 
 
 

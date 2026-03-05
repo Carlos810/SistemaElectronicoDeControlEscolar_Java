@@ -15,12 +15,10 @@
           th:object="${actividad}"
           method="post">
 
-      <!-- ================= ID ================= -->
-
+      <!-- ID -->
       <input type="hidden" th:field="*{idActividad}">
 
-      <!-- ================= USUARIO ================= -->
-
+      <!-- USUARIO -->
       <div class="mb-3">
 
         <label class="form-label">Usuario</label>
@@ -31,17 +29,14 @@
 
           <option th:each="u : ${usuarios}"
                   th:value="${u.idUsuario}"
-                  th:text="${u.nombre}"
-                  th:selected="${actividad.usuario != null and u.idUsuario == actividad.usuario.idUsuario}">
-          >
+                  th:text="${u.nombre}">
           </option>
 
         </select>
 
       </div>
 
-      <!-- ================= SALA ================= -->
-
+      <!-- SALA -->
       <div class="mb-3">
 
         <label class="form-label">Sala</label>
@@ -52,17 +47,14 @@
 
           <option th:each="s : ${salas}"
                   th:value="${s.idSala}"
-                  th:text="${s.nombre}"
-                  th:selected="${actividad.sala != null and s.idSala == actividad.sala.idSala}">
-          >
+                  th:text="${s.nombre}">
           </option>
 
         </select>
 
       </div>
 
-      <!-- ================= NOMBRE ACTIVIDAD ================= -->
-
+      <!-- NOMBRE ACTIVIDAD -->
       <div class="mb-3">
 
         <label class="form-label">Nombre Actividad</label>
@@ -75,8 +67,7 @@
 
       </div>
 
-      <!-- ================= FECHA ================= -->
-
+      <!-- FECHA -->
       <div class="mb-3">
 
         <label class="form-label">Fecha</label>
@@ -89,11 +80,10 @@
 
       </div>
 
-      <!-- ================= HORA ================= -->
-
+      <!-- HORA ENTRADA -->
       <div class="mb-3">
 
-        <label class="form-label">Hora de Entrada</label>
+        <label class="form-label">Hora Entrada</label>
 
         <div class="input-group">
 
@@ -106,7 +96,7 @@
 
           <button type="button"
                   class="btn btn-outline-secondary"
-                  id="btnHoraActual">
+                  onclick="usarHoraActualEntrada()">
 
             Usar hora actual
 
@@ -116,24 +106,60 @@
 
       </div>
 
-      <!-- ================= CAMPO OCULTO LocalDateTime ================= -->
+      <!-- HORA SALIDA -->
+      <div class="mb-3">
+
+        <label class="form-label">Hora Salida</label>
+
+        <div class="input-group">
+
+          <input id="horaActividadSalida"
+                 type="time"
+                 class="form-control"
+                 step="60"
+                 th:value="${actividad.horarioSalida != null} ? ${#temporals.format(actividad.horarioSalida,'HH:mm')} : ''">
+
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  onclick="usarHoraSalidaMasUno()">
+
+            Hora actual +1h
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- CAMPOS OCULTOS LOCALDATETIME -->
 
       <input type="hidden"
              th:field="*{horarioEntrada}"
              id="horarioEntradaFinal">
 
-      <!-- ================= BOTONES ================= -->
+      <input type="hidden"
+             th:field="*{horarioSalida}"
+             id="horarioSalidaFinal">
+
+
+      <!-- BOTONES -->
 
       <div class="d-flex justify-content-between">
 
-        <a th:href="@{/web/actividades}" class="btn btn-secondary">
+        <a th:href="@{/web/actividades}"
+           class="btn btn-secondary">
+
           Cancelar
+
         </a>
 
         <button type="submit"
                 class="btn btn-primary"
+                onclick="prepararFechas()"
                 th:text="${actividad.idActividad == null} ? 'Guardar' : 'Actualizar'">
+
           Guardar
+
         </button>
 
       </div>
@@ -141,4 +167,6 @@
     </form>
 
   </div>
+
+
 </div>
