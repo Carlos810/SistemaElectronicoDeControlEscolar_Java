@@ -8,6 +8,6 @@ public interface RegistroDiarioProjection {
     String getFecha();
     String getHoraEntrada();
     String getHoraSalida();
-    String getTiempoAulaHrs();
+    float getTiempoAulaHrs();
     Integer getEstatus();
 }
