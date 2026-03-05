@@ -65,6 +65,25 @@
         input[type="text"],textarea {
             text-transform: lowercase;
         }
+        /* Estado Activo */
+        .estado-activo {
+            color: #00ff40;          /* verde fluorescente */
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #00cc33;
+            background-color: #eaffea;
+        }
+
+        /* Estado Inactivo */
+        .estado-inactivo {
+            color: #ff6a00;          /* naranja fuerte */
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #ff6a00;
+            background-color: #fff2e6;
+        }
     </style>
 
 </head>
@@ -204,6 +223,21 @@ function configurarSubmitFormulario(){
 
         }
 
+         $(this).find("input, textarea").each(function(){
+
+            let tipo = $(this).attr("type");
+
+            if(tipo !== "hidden" && tipo !== "password" && tipo !== "date" && tipo !== "time"){
+
+                let valor = $(this).val();
+
+                if(valor){
+                    $(this).val(valor.toUpperCase());
+                }
+
+            }
+
+        });
     });
 
 }

@@ -27,7 +27,11 @@
                     <td th:text="${sala.idSala}"></td>
                     <td th:text="${sala.nombre}"></td>
                     <td th:text="${sala.descripcion}"></td>
-                    <td th:text="${sala.disponible}"></td>
+                    <td>
+                        <span th:text="${sala.disponible == 1 ? 'Activa' : 'Inactiva'}"
+                              th:class="${sala.disponible == 1 ? 'estado-activo' : 'estado-inactivo'}">
+                        </span>
+                    </td>
                     <td>
                         <a th:href="@{/web/salas/new(id=${sala.idSala})}"
                            class="btn btn-info text-white btn-sm">

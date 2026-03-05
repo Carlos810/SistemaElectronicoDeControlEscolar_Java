@@ -33,7 +33,11 @@
                         <td th:text="${usuario.idUsuario}"></td>
                         <td th:text="${usuario.nombre}"></td>
                         <td th:text="${usuario.correo}"></td>
-                        <td th:text="${usuario.estatus}"></td>
+                        <td>
+                            <span th:text="${usuario.estatus == 1 ? 'Activo' : 'Inactivo'}"
+                                  th:class="${usuario.estatus == 1 ? 'estado-activo' : 'estado-inactivo'}">
+                            </span>
+                        </td>
                         <td th:text="${usuario.fechaCreacion.toLocalDate()}"></td>
                         <td>
                             <a th:href="@{/web/usuarios/new(id=${usuario.idUsuario})}"

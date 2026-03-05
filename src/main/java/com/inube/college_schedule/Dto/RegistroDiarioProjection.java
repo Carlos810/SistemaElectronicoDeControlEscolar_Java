@@ -9,4 +9,5 @@ public interface RegistroDiarioProjection {
     String getHoraEntrada();
     String getHoraSalida();
     String getTiempoAulaHrs();
+    Integer getEstatus();
 }

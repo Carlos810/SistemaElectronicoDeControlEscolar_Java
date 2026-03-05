@@ -22,6 +22,7 @@
                     <th>Hora Entrada</th>
                     <th>Hora Salida</th>
                     <th>Permanencia en Aula</th>
+                    <th>Estatus</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -34,6 +35,11 @@
                     <td th:text="${act.horaEntrada}"></td>
                     <td th:text="${act.horaSalida}"></td>
                     <td th:text="${act.tiempoAulaHrs}"></td>
+                    <td>
+                         <span th:text="${(act.estatus == 1) ? 'Activo' : 'Inactivo'}"
+                               th:class="${(act.estatus == 1) ? 'estado-activo' : 'estado-inactivo'}">
+                         </span>
+                    </td>
                     <td>
                         <a th:href="@{/web/actividades/new(id=${act.idActividad})}"
                            class="btn btn-info text-white btn-sm">

@@ -67,9 +67,7 @@ public class UsuarioController {
 
     @PostMapping("/toggle/{id}")
     public String cambiarEstado(@PathVariable Long id){
-
         _usuariosService.toggleEstado(id);
-
         return "redirect:/web/usuarios";
     }
 

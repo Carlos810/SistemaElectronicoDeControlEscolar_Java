@@ -20,8 +20,7 @@ public interface IUsuarioJpaRepository extends JpaRepository<Usuario,Long> {
     @Query("""
         SELECT U
             FROM Usuario U
-        WHERE U.estatus = 1
-            AND (:id IS NULL OR U.idUsuario = :id )
+        WHERE (:id IS NULL OR U.idUsuario = :id )
     """)
     List<Usuario> buscarUsuariosActivos(@Param("id")Long id);
 

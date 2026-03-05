@@ -16,6 +16,7 @@ public interface IActividadRepository extends JpaRepository<Actividad, Long> {
     //Consumir vistas
     @Query(value = """
                 SELECT
+                    ESTATUS,
                     ID_ACTIVIDAD  as idActividad,     
                     NOMBRE as nombre,
                     NOMBRE_ACTIVIDAD as nombreActividad,
